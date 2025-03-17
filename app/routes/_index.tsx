@@ -25,21 +25,26 @@ export const meta: MetaFunction = () => ([
 export default function Index() {
   const [apiKey, setApiKey] = useState('');
   const [selectedFeature, setSelectedFeature] = useState('chat');
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
       const storedApiKey = localStorage.getItem('openai_api_key');
       if (storedApiKey) {
         setApiKey(storedApiKey);
       }
     }
-  }, []);
+  }, [isClient]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (isClient) {
       localStorage.setItem('openai_api_key', apiKey);
     }
-  }, [apiKey]);
+  }, [apiKey, isClient]);
 
   const renderFeature = useCallback(() => {
     const features = {

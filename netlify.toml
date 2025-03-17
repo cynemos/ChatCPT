@@ -1,0 +1,19 @@
+# netlify.toml
+
+[build]
+  command = "npm run build"
+  publish = "public"
+
+[dev]
+  command = "npm run dev"
+  port = 3000
+  publish = "public"
+
+[functions]
+  directory = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # Add any other environment variables required by your app here
+  # For example:
+  # API_KEY = "your_api_key"
